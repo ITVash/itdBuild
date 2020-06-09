@@ -8,7 +8,7 @@ dotenv.config()
 connect()
 CreateRoutes(app)
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5051
 app.listen(PORT, () => {
   console.log(`Сервер запущен по адресу: http://localhost:${PORT}`)
 })

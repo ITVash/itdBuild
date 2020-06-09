@@ -5,6 +5,7 @@ import multer from "multer"
 import path from "path"
 import webpush from 'web-push'
 import dotenv from 'dotenv'
+import nodemailer from 'nodemailer'
 
 import {
 	UserControllers,
@@ -56,6 +57,77 @@ const CreateRoutes = (app: express.Express) => {
 	})
 	app.get("/api", (req: express.Request, res: express.Response) => {
 		res.send("Тут все роуты нашего сервера!!!")
+	})
+
+	/**
+	 * Send Mail
+	 */
+	app.post("/api/sendform", async (req: express.Request, res: express.Response) => {
+		const data:{name: string, phone: string, email: string, text: string} = req.body
+		if (!data.name || !data.phone || !data.email || !data.text) return res.status(400).json({ message: "Поля не могут быть пустыми" })
+		const transport = nodemailer.createTransport({
+			host: "smtp.gmail.com",
+			port: 465,
+			secure: true,
+			auth: {
+				user: "itdwebcompany@gmail.com",
+				pass: "itd2019web"
+			}
+		})
+		await transport.sendMail({
+			from: "robot@itd.company",
+			to: "vashdns@gmail.com",
+			subject: "Обратная связь с сайта",
+			text: `${data.text}`,
+			html: `<p>Имя отправителя: ${data.name}</p>
+			<p>Телефон отправителя: ${data.phone}</p>
+			<p>Почта отправителя: ${data.email}</p>
+			<p>Сообщение: <br /> ${data.text}</p>`
+		}, (error, info) => {
+				if (error) {
+					console.log('Ошибка отправки почты!', error)
+				} else {
+					console.log('Почта отправлена!', info)
+				}
+		})
+		//console.log('data', data)
+	})
+
+	app.post("/api/sendclick", async (req: express.Request, res: express.Response) => {
+		const data = req.body
+		console.log('data', data)
+		console.log('req', req.body)
+		if (!data.forms[0] || !data.forms[1] || !data.forms[2] || !data.forms[3]) return res.status(400).json({ message: "Поля не могут быть пустыми", data })
+		const transport = nodemailer.createTransport({
+			host: "smtp.gmail.com",
+			port: 465,
+			secure: true,
+			auth: {
+				user: "itdwebcompany@gmail.com",
+				pass: "itd2019web"
+			}
+		})
+		await transport.sendMail({
+			from: "robot@itd.company",
+			to: "vashdns@gmail.com",
+			subject: "Чеклист с сайта",
+			text: `${data.forms[3]}`,
+			html: `<p>Имя отправителя: ${data.forms[0]}</p>
+			<p>Телефон отправителя: ${data.forms[1]}</p>
+			<p>Почта отправителя: ${data.forms[2]}</p>
+			<p>Сообщение: <br /> ${data.forms[3]}</p>
+			<p>Данные чекбокса:</p>
+			<p>Тип сайта: ${data.list1}</p>
+			<p>Языки: ${data.list2}</p>
+			<p>Сроки: ${data.list3}</p>
+			<p>Наличие логотипа или фирменного стиля: ${data.list4}</p>`
+		}, (error, info) => {
+				if (error) {
+					console.log('Ошибка отправки почты!', error)
+				} else {
+					console.log('Почта отправлена!', info)
+				}
+		})
 	})
 
 	/**
