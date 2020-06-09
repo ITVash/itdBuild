@@ -70,13 +70,13 @@ const CreateRoutes = (app: express.Express) => {
 			port: 465,
 			secure: true,
 			auth: {
-				user: "itdwebcompany@gmail.com",
-				pass: "itd2019web"
+				user: "vashdns@gmail.com",
+				pass: "ragnarok1985"
 			}
 		})
 		await transport.sendMail({
 			from: "robot@itd.company",
-			to: "vashdns@gmail.com",
+			to: "itdwebcompany@gmail.com",
 			subject: "Обратная связь с сайта",
 			text: `${data.text}`,
 			html: `<p>Имя отправителя: ${data.name}</p>
@@ -86,8 +86,10 @@ const CreateRoutes = (app: express.Express) => {
 		}, (error, info) => {
 				if (error) {
 					console.log('Ошибка отправки почты!', error)
+					res.status(400).json('Ошибка отправки почты!')
 				} else {
 					console.log('Почта отправлена!', info)
+					res.status(200).json('Почта отправлена!')
 				}
 		})
 		//console.log('data', data)
@@ -103,13 +105,13 @@ const CreateRoutes = (app: express.Express) => {
 			port: 465,
 			secure: true,
 			auth: {
-				user: "itdwebcompany@gmail.com",
-				pass: "itd2019web"
+				user: "vashdns@gmail.com",
+				pass: "ragnarok1985"
 			}
 		})
 		await transport.sendMail({
 			from: "robot@itd.company",
-			to: "vashdns@gmail.com",
+			to: "itdwebcompany@gmail.com",
 			subject: "Чеклист с сайта",
 			text: `${data.forms[3]}`,
 			html: `<p>Имя отправителя: ${data.forms[0]}</p>
@@ -124,8 +126,10 @@ const CreateRoutes = (app: express.Express) => {
 		}, (error, info) => {
 				if (error) {
 					console.log('Ошибка отправки почты!', error)
+					res.status(400).json('Ошибка отправки почты!')
 				} else {
 					console.log('Почта отправлена!', info)
+					res.status(200).json('Почта отправлена!')
 				}
 		})
 	})
