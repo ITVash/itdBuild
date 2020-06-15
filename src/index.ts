@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import https from 'https'
+import http from 'http'
 
 import { CreateRoutes, connect } from './core'
 
@@ -9,7 +9,7 @@ dotenv.config()
 connect()
 CreateRoutes(app)
 
-const serv = https.createServer(app)
+const serv = http.createServer(app)
 
 const PORT:number | any = process.env.PORT || 5051
 //const host: string = 'api.itd.company'
