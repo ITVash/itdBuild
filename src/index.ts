@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import https from 'https'
 
 import { CreateRoutes, connect } from './core'
 
@@ -8,7 +9,19 @@ dotenv.config()
 connect()
 CreateRoutes(app)
 
-const PORT = process.env.PORT || 5051
-app.listen(PORT, () => {
-  console.log(`Сервер запущен по адресу: http://localhost:${PORT}`)
+const serv = https.createServer(app)
+
+const PORT:number | any = process.env.PORT || 5051
+const host: string = 'api.itd.company'
+//const host:string = 'localhost'
+/* app.listen(PORT, host, () => {
+  console.log(`Сервер запущен по адресу: ${host}:${PORT}`)
+}) */
+serv.listen(PORT, host, () => {
+  console.log(`Сервер запущен по адресу: http://${host}:${PORT}`)
+  //console.log('Адресс: ', serv.address().address)
+})
+serv.on('listening', () => {
+  const address = serv.address()
+  console.log('Listen: ', address)
 })
