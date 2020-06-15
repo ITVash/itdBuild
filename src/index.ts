@@ -12,8 +12,8 @@ CreateRoutes(app)
 const serv = https.createServer(app)
 
 const PORT:number | any = process.env.PORT || 5051
-const host: string = 'api.itd.company'
-//const host:string = 'localhost'
+//const host: string = 'api.itd.company'
+const host:string = 'localhost'
 /* app.listen(PORT, host, () => {
   console.log(`Сервер запущен по адресу: ${host}:${PORT}`)
 }) */
