@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "serve": "nodemon"
+    "serve": "nodemon",
+    "git": "git add . && git commit -m \"Fix Upd\" && git push"
   },
   "keywords": [
     "TypeScript"
@@ -26,6 +27,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-subdomain": "^1.0.5",
     "http": "0.0.1-security",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
