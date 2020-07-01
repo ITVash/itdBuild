@@ -14,9 +14,9 @@ CreateRoutes(app)
 const opt = {
   key: fs.readFileSync('/home/itd.company/conf/web/ssl.api.itd.company.key'),
   cert: fs.readFileSync('/home/itd.company/conf/web/ssl.api.itd.company.crt'),
-  port: "443",
+  //port: "443",
   ca: fs.readFileSync('/home/itd.company/conf/web/ssl.api.itd.company.ca'),
-  pfx: fs.readFileSync('/home/itd.company/conf/web/ssl.api.itd.company.ca')
+  //pfx: fs.readFileSync('/home/itd.company/conf/web/ssl.api.itd.company.ca')
 }
 const serv = new https.Server(opt, app)
 
