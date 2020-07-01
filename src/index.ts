@@ -14,7 +14,7 @@ CreateRoutes(app)
 
 const PORT:number | any = process.env.PORT || 5051
 //const host: string = 'api.itd.company'
-const host:string = '192.168.0.76'
+const host:string = '93.171.233.145'
 app.listen(PORT, host, (e) => {
   console.log(`Сервер запущен по адресу: ${host}:${PORT}`)
   console.log('e', e)
